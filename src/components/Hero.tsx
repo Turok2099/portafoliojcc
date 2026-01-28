@@ -1,167 +1,103 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import {
-  ArrowDownIcon,
-  EnvelopeIcon,
-  PhoneIcon,
-} from "@heroicons/react/24/outline";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { FiChevronDown } from "react-icons/fi";
 
 export default function Hero() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const heroRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (heroRef.current) {
-        const rect = heroRef.current.getBoundingClientRect();
-        setMousePosition({
-          x: e.clientX - rect.left,
-          y: e.clientY - rect.top,
-        });
-      }
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
-
-  const gradientStyle = {
-    background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(59, 130, 246, 0.15), transparent 40%)`,
-  };
-
   return (
     <section
-      ref={heroRef}
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/30"
-      style={gradientStyle}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-surface-900"
     >
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAzOWMwIDUuMDIzLTQuOTc3IDktMTEgOUMyMC45NzcgNDggMTYgNDQuMDIzIDE2IDM5czQuOTc3LTkgMTEtOWM2LjAyMyAwIDExIDMuOTc3IDExIDl6IiBzdHJva2U9IiM5Y2FmZjkiIHN0cm9rZS13aWR0aD0iMS41IiBvcGFjaXR5PSIwLjEiLz48L2c+PC9zdmc+')] bg-repeat"></div>
+      {/* Gradient orbs */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-cyan-500/15 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-3xl" />
       </div>
 
-      <div className="container-custom relative z-10 section-padding">
-        <div className="text-center max-w-4xl mx-auto">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 text-blue-700 text-sm font-medium mb-8 animate-fade-in">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-600"></span>
+      {/* Grid pattern */}
+      <div
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: `linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px)`,
+          backgroundSize: "64px 64px",
+        }}
+      />
+
+      <div className="container-custom section-padding relative z-10">
+        <div className="max-w-3xl mx-auto text-center">
+          {/* Profile Image */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            className="mb-8 flex justify-center"
+          >
+            <div className="relative w-40 h-40 md:w-48 md:h-48">
+              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-500/30 to-cyan-500/30 blur-xl" />
+              <Image
+                src="https://res.cloudinary.com/dxbtafe9u/image/upload/f_auto,q_auto:eco,fl_progressive,w_400,h_400,c_fill,g_face/v1769566788/Gemini_Generated_Image_bikj1nbikj1nbikj_bdpup6.png"
+                alt="Jorge Castro - Full Stack Developer"
+                width={192}
+                height={192}
+                className="relative rounded-full border-4 border-surface-700/50 shadow-xl object-cover"
+                priority
+              />
+            </div>
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 px-4"
+          >
+            <span className="gradient-text">Jorge Castro</span>
+            <br />
+            <span className="text-slate-100">Full Stack Developer</span>
+            <br />
+            <span className="text-slate-400 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium">
+              SEO Specialist &amp; Data Science
             </span>
-            Disponible para proyectos
-          </div>
+          </motion.h1>
 
-          {/* Main Heading */}
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 animate-fade-in-up">
-            <span className="gradient-text">Full Stack Developer</span>
-            <br className="hidden md:block" />
-            <span className="text-slate-900">&amp; SEO Specialist</span>
-          </h1>
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="text-base md:text-lg lg:text-xl text-slate-400 mb-10 max-w-2xl mx-auto px-4"
+          >
+            Soluciones web con <span className="text-slate-200">React</span>,{" "}
+            <span className="text-slate-200">Next.js</span>,{" "}
+            <span className="text-slate-200">TypeScript</span> y optimización
+            SEO. Proyectos en producción, en constante mejora.
+          </motion.p>
 
-          <p className="text-xl md:text-2xl text-slate-600 mb-8 max-w-2xl mx-auto animate-fade-in-up animation-delay-200">
-            Construyendo soluciones web escalables con
-            <span className="font-semibold text-slate-900">
-              {" "}
-              React, Next.js, TypeScript
-            </span>{" "}
-            y
-            <span className="font-semibold text-slate-900">
-              {" "}
-              optimización SEO
-            </span>
-          </p>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 animate-fade-in-up animation-delay-300">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center items-center mb-12 px-4"
+          >
             <Link
               href="#projects"
-              className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+              className="w-full sm:w-auto px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-lg font-semibold shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:scale-[1.02] transition-all duration-300 text-center"
             >
-              Ver Proyectos
+              Ver proyectos
             </Link>
             <Link
               href="#contact"
-              className="px-8 py-4 bg-white text-blue-600 rounded-lg font-semibold border-2 border-blue-600 hover:bg-blue-50 transition-all duration-300"
+              className="w-full sm:w-auto px-6 md:px-8 py-3 md:py-4 bg-surface-800 border border-surface-600 text-slate-200 rounded-lg font-semibold hover:bg-surface-700 hover:border-surface-500 transition-all duration-300 text-center"
             >
-              Contáctame
+              Contacto
             </Link>
-          </div>
-
-          {/* Contact Info */}
-          <div className="flex flex-wrap justify-center gap-6 text-slate-600 animate-fade-in animation-delay-500">
-            <a
-              href="mailto:jorge.castro.cruz@hotmail.com"
-              className="flex items-center gap-2 hover:text-blue-600 transition-colors"
-            >
-              <EnvelopeIcon className="h-5 w-5" />
-              <span className="text-sm">jorge.castro.cruz@hotmail.com</span>
-            </a>
-            <a
-              href="tel:+525545210178"
-              className="flex items-center gap-2 hover:text-blue-600 transition-colors"
-            >
-              <PhoneIcon className="h-5 w-5" />
-              <span className="text-sm">+52 55 4521 0178</span>
-            </a>
-          </div>
-        </div>
-
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <Link
-            href="#about"
-            className="flex flex-col items-center gap-2 text-slate-400 hover:text-blue-600 transition-colors"
-          >
-            <span className="text-sm font-medium">Ver más</span>
-            <ArrowDownIcon className="h-6 w-6" />
-          </Link>
+          </motion.div>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes fade-in {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
-        }
-
-        @keyframes fade-in-up {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .animate-fade-in {
-          animation: fade-in 0.8s ease-out;
-        }
-
-        .animate-fade-in-up {
-          animation: fade-in-up 0.8s ease-out backwards;
-        }
-
-        .animation-delay-200 {
-          animation-delay: 0.2s;
-        }
-
-        .animation-delay-300 {
-          animation-delay: 0.4s;
-        }
-
-        .animation-delay-500 {
-          animation-delay: 0.6s;
-        }
-      `}</style>
     </section>
   );
 }

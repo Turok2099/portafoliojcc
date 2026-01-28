@@ -1,97 +1,62 @@
+import { FiLinkedin, FiGithub, FiMail } from "react-icons/fi";
+
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
+  const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-slate-900 text-white py-12">
+    <footer className="bg-surface-800 border-t border-surface-700/50 py-12">
       <div className="container-custom px-4 md:px-8">
-        <div className="grid md:grid-cols-3 gap-8 mb-8">
-          <div>
-            <h3 className="text-xl font-bold mb-4">Jorge Castro</h3>
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="text-center md:text-left">
             <p className="text-slate-400 text-sm">
-              Full Stack Developer especializado en React, Next.js, TypeScript y
-              SEO técnico.
+              © {year} Jorge Castro. Todos los derechos reservados.
             </p>
           </div>
-
-          <div>
-            <h4 className="font-semibold mb-4">Navegación</h4>
-            <ul className="space-y-2 text-sm text-slate-400">
-              <li>
-                <a href="#about" className="hover:text-white transition-colors">
-                  Sobre Mí
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#skills"
-                  className="hover:text-white transition-colors"
-                >
-                  Habilidades
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#projects"
-                  className="hover:text-white transition-colors"
-                >
-                  Proyectos
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#experience"
-                  className="hover:text-white transition-colors"
-                >
-                  Experiencia
-                </a>
-              </li>
-            </ul>
+          <div className="flex items-center gap-6">
+            <a
+              href="#about"
+              className="text-slate-400 hover:text-blue-400 text-sm font-medium transition-colors"
+            >
+              Sobre mí
+            </a>
+            <a
+              href="#projects"
+              className="text-slate-400 hover:text-blue-400 text-sm font-medium transition-colors"
+            >
+              Proyectos
+            </a>
+            <a
+              href="#contact"
+              className="text-slate-400 hover:text-blue-400 text-sm font-medium transition-colors"
+            >
+              Contacto
+            </a>
           </div>
-
-          <div>
-            <h4 className="font-semibold mb-4">Contacto</h4>
-            <ul className="space-y-2 text-sm text-slate-400">
-              <li>
-                <a
-                  href="mailto:jorge.castro.cruz@hotmail.com"
-                  className="hover:text-white transition-colors"
-                >
-                  jorge.castro.cruz@hotmail.com
-                </a>
-              </li>
-              <li>
-                <a
-                  href="tel:+525545210178"
-                  className="hover:text-white transition-colors"
-                >
-                  +52 55 4521 0178
-                </a>
-              </li>
-              <li>Ciudad de México</li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-slate-400 text-sm">
-            © {currentYear} Jorge Castro. Todos los derechos reservados.
-          </p>
-          <div className="flex gap-6 text-slate-400 text-sm">
+          <div className="flex items-center gap-4">
             <a
               href="https://www.linkedin.com/in/jorge-castro-953267144"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-white transition-colors"
+              className="p-2 text-slate-400 hover:text-blue-400 rounded-lg hover:bg-surface-700/50 transition-all"
+              aria-label="LinkedIn"
             >
-              LinkedIn
+              <FiLinkedin className="h-5 w-5" />
             </a>
             <a
               href="https://github.com/Turok2099"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-white transition-colors"
+              className="p-2 text-slate-400 hover:text-blue-400 rounded-lg hover:bg-surface-700/50 transition-all"
+              aria-label="GitHub"
             >
-              GitHub
+              <FiGithub className="h-5 w-5" />
+            </a>
+            <a
+              href="mailto:jorge.castro.cruz@hotmail.com"
+              className="p-2 text-slate-400 hover:text-blue-400 rounded-lg hover:bg-surface-700/50 transition-all"
+              aria-label="Email"
+            >
+              <FiMail className="h-5 w-5" />
             </a>
           </div>
         </div>
